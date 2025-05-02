@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تحليل كلمة المرور</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="box">
+        <h2>🔐 تحليل قوة كلمة المرور</h2>
+        <form method="post">
+            <input type="password" name="password" placeholder="كلمة المرور" required>
+            <br><br>
+            <button type="submit">تحليل</button>
+            <button type="button" onclick="window.location.href='/generate'">🔁 توليد ذكي</button>
+        </form>
+
+        {% if generated %}
+        <div class="result green">
+            كلمة المرور الذكية: <strong>{{ generated }}</strong>
+        </div>
+        {% endif %}
+
+        {% if results %}
+        <div class="result {{ results.color }}">
+            النتيجة: {{ results.label }}<br>
+            الوقت المتوقع للاختراق: {{ results.time }}
+        </div>
+        {% if suggestions %}
+        <ul>
+            {% for suggestion in suggestions %}
+            <li>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
